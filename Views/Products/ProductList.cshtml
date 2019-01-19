@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProductsApp.ViewModel.ProductsListViewModel>
+
+@{
+    ViewBag.Title = "ProductListView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateProduct","Products")
+</p>
+@using (Html.BeginForm("ProductList", "Products"))
+{
+    <p>
+        Find by Category: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category.categoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subcategory.subCategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.products.productCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.products.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.products.inStock)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.category.categoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subcategory.subCategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.products.productCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.products.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.products.inStock)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.products.productId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.products.productId })
+        </td>
+    </tr>
+}
+
+</table>
